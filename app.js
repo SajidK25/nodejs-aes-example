@@ -25,10 +25,10 @@ const pool = new Pool({
 // Define the encryption key and algorithm
 const algorithm = 'aes-256-cbc';
 // const key = process.env.ENCRYPTION_KEY; // Replace with your own encryption key
-const key = crypto.randomBytes(32);
+const key = crypto.randomBytes(16);
 // Define a function to encrypt data
 function encrypt(text) {
-  const iv = crypto.randomBytes(32);
+  const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
