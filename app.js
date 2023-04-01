@@ -2,31 +2,35 @@ const express = require('express');
 const app = express();
 const { Pool } = require('pg');
 const crypto = require('crypto');
+require('dotenv').config();
 
 // Create a new pool with your PostgreSQL database credentials
-const pool = new Pool({
-    user: "pbmzkmkctzpxmb",
-    host: "ec2-52-21-61-131.compute-1.amazonaws.com",
-    database: "d6vj0gflgdvok5",
-    password: "678b2d607cdc8bf6268153f46f6095d091aa5171c50eba6de35dbc0e5cbe81b4",
-    port: 5432,
-    ssl: {
-       rejectUnauthorized: false,
-    },
-  });
 // const pool = new Pool({
-//   user: process.env.PGUSER,
-//   host: process.env.PGHOST,
-//   database: process.env.PGDATABASE,
-//   password: process.env.PGPASSWORD,
-//   port: process.env.PGPORT
-// });
+//     user: "pbmzkmkctzpxmb",
+//     host: "ec2-52-21-61-131.compute-1.amazonaws.com",
+//     database: "d6vj0gflgdvok5",
+//     password: "678b2d607cdc8bf6268153f46f6095d091aa5171c50eba6de35dbc0e5cbe81b4",
+//     port: 5432,
+//     ssl: {
+//        rejectUnauthorized: false,
+//     },
+//   });
+const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+  ssl: {
+    rejectUnauthorized: false,
+ }
+});
 
 // Define the encryption key and algorithm
-const algorithm = 'aes-256-cbc';
-// const key = process.env.ENCRYPTION_KEY; // Replace with your own encryption key
+const algorithm = 'aes-256-cbc'; 
+const key = process.env.ENCRYPTION_KEY; // Replace with your own encryption key
 //const key = crypto.randomBytes(32);
-const key = 'CIDBAAJQJYUHDLMXZAOMXWW3QYF2Z2EH'
+// const key = 'CIDBAAJQJYUHDLMXZAOMXWW3QYF2Z2EH'
 // Define a function to encrypt data
 function encrypt(text) {
   const iv = crypto.randomBytes(16);
