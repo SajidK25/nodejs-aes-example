@@ -25,7 +25,8 @@ const pool = new Pool({
 // Define the encryption key and algorithm
 const algorithm = 'aes-256-cbc';
 // const key = process.env.ENCRYPTION_KEY; // Replace with your own encryption key
-const key = crypto.randomBytes(16);
+// const key = crypto.randomBytes(32);
+const key = '1ff15c0ff389e4e91d59717245ace1fec1dff33b70de9fbcb16337c2a5633260'
 // Define a function to encrypt data
 function encrypt(text) {
   const iv = crypto.randomBytes(16);
